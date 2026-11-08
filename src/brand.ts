@@ -19,6 +19,7 @@ export type Brand = {
   sousTitres: {
     taille: number; // en pixels, sur une vidéo 1080 × 1920
     styleMotActif: "couleur" | "fond"; // mot en cours coloré, ou posé sur un bloc de couleur
+    italique?: boolean; // sous-titres en italique
   };
   animation: "dynamique" | "douce"; // rebonds rapides, ou mouvements lents et fluides
   arrondi: number; // arrondi des blocs, en pixels

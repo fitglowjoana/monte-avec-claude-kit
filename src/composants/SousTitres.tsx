@@ -54,6 +54,7 @@ export const SousTitres: React.FC<{ mots: MotPlace[]; reglages: Montage["sousTit
           gap: "6px 18px",
           fontFamily: pile(brand.polices.sousTitres),
           fontWeight: brand.poids.sousTitres,
+          fontStyle: brand.sousTitres.italique ? "italic" : "normal",
           fontSize: brand.sousTitres.taille,
           lineHeight: 1.15,
           textAlign: "center",

@@ -27,7 +27,7 @@ export const chargerPolices = () => {
         const style = document.createElement("style");
         style.textContent = await cssPour(f);
         document.head.appendChild(style);
-        await Promise.all([400, 700, 800, 900].map((w) => document.fonts.load(`${w} 40px "${f}"`)));
+        await Promise.all([400, 500, 700, 800, 900].flatMap((w) => [document.fonts.load(`${w} 40px "${f}"`), document.fonts.load(`italic ${w} 40px "${f}"`)]));
       } catch (e) {
         console.warn(String(e));
       }
