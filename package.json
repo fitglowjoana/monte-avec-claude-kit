@@ -1,0 +1,40 @@
+{
+  "name": "monte-avec-claude-kit",
+  "version": "1.0.0",
+  "description": "Le kit de la formation Monte avec Claude : tu tournes, Claude monte.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "transcrire": "node scripts/transcrire.mjs",
+    "silences": "node scripts/silences.mjs",
+    "convertir": "node scripts/convertir.mjs",
+    "rendu": "remotion render src/index.ts Reel out/reel.mp4",
+    "couverture": "remotion still src/index.ts Couverture out/couverture.png",
+    "verifier": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fitglowjoana/monte-avec-claude-kit.git"
+  },
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/fitglowjoana/monte-avec-claude-kit/issues"
+  },
+  "homepage": "https://github.com/fitglowjoana/monte-avec-claude-kit#readme",
+  "dependencies": {
+    "@remotion/captions": "4.0.250",
+    "@remotion/cli": "4.0.250",
+    "@remotion/install-whisper-cpp": "4.0.250",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.250"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "typescript": "^5.6.3"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
