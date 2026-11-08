@@ -66,4 +66,6 @@ Quand elle commence une nouvelle vidéo : remets `src/montage.ts` à son état d
 - **Vidéo noire ou illisible dans le studio** : vidéo iPhone en HEVC → `npm run convertir -- NOM.MOV`.
 - **Node trop ancien** (`node -v` < 18) : lui dire d'installer la version LTS sur nodejs.org.
 - **Transcription qui échoue sur Mac** avec une erreur de `make` ou de compilateur : il manque les outils Apple. Lui faire lancer `xcode-select --install`, accepter, puis relancer `npm run transcrire`.
+- **Windows : « l'exécution de scripts est désactivée »** quand elle lance `npm` dans PowerShell : lui faire taper `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, répondre O, puis relancer.
+- **Windows : `git` introuvable** : installer Git depuis git-scm.com (options par défaut) et rouvrir PowerShell.
 - **Police qui ne s'affiche pas** : le nom dans `brand.ts` doit être exactement celui de Google Fonts.

@@ -11,9 +11,24 @@ Tu tournes, Claude monte. Ce kit est ton studio de montage : coupes automatiques
 
 ## Installation (une seule fois)
 
-Ouvre le Terminal (Mac) ou PowerShell (Windows), puis tape ces commandes une par une :
+Ouvre le Terminal (Mac) ou PowerShell (Windows), puis tape ces commandes une par une.
 
-**1. Installer Claude Code** : copie la commande pour ton système depuis la page officielle [Claude Code](https://code.claude.com/docs/en/setup).
+**Sur Windows uniquement, avant tout** : installe Git depuis [git-scm.com](https://git-scm.com) (options par défaut), puis autorise les commandes npm dans PowerShell (réponds O ou Y) :
+```
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+**1. Installer Claude Code**
+
+Mac :
+```
+curl -fsSL https://claude.ai/install.sh | bash
+```
+Windows (PowerShell) :
+```
+irm https://claude.ai/install.ps1 | iex
+```
+Ferme puis rouvre le Terminal ou PowerShell.
 
 **2. Récupérer le kit**
 ```
