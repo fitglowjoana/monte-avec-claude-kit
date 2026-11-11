@@ -1,6 +1,6 @@
 # Ta charte vidéo avec Claude
 
-Ce kit fonctionne avec n'importe quel style. Ta charte se trouve dans un seul fichier, `src/brand.ts` : quand il change, tous tes effets et tes sous-titres changent avec lui.
+Ce kit fonctionne avec n'importe quel style. Ta charte se trouve dans un seul fichier, `charte/ma-charte.md` : Claude la lit avant chaque montage, et l'applique à tes sous-titres, tes titres et tous tes effets.
 
 Avant de commencer, réponds par écrit à une seule question :
 **Qu'est-ce que ta cliente idéale doit ressentir dans les trois premières secondes de ta vidéo ?**
@@ -28,15 +28,15 @@ Ensuite, propose-moi trois directions différentes. Pour chacune : un nom, une p
 Tu peux choisir, mélanger ou ajuster : « la deuxième, mais en plus chaud », « la police de la première avec les couleurs de la troisième ».
 
 ```
-Je choisis [ta direction]. Applique-la dans src/brand.ts et dis-moi où regarder dans le studio.
+Je choisis [ta direction]. Écris-la dans charte/ma-charte.md, puis fabrique une courte vidéo d'exemple avec ma dernière vidéo pour que je voie le résultat.
 ```
 
-Regarde la composition **Exemple** dans le studio : couleurs, polices, sous-titres et effets ont changé d'un coup.
+Regarde l'aperçu : couleurs, polices, sous-titres et effets suivent ta charte. À partir de maintenant, chaque montage l'utilise.
 
 ## Étape 3 · Ta signature motion
 
 ```
-À partir de ma charte, propose-moi trois idées de signature motion : un élément qui revient dans chacune de mes vidéos (une façon d'apparaître pour mes titres, un soulignement dessiné, un cadre, une transition…). Quand j'ai choisi, crée-la comme un nouvel effet du catalogue, avec un nom court, et ajoute-la à la vidéo d'exemple pour que je la voie.
+À partir de ma charte, propose-moi trois idées de signature motion : un élément qui revient dans chacune de mes vidéos (une façon d'apparaître pour mes titres, un soulignement dessiné, un cadre, une transition…). Pars d'un effet de la bibliothèque HyperFrames si ça colle. Quand j'ai choisi, crée-la à mes couleurs, note dans charte/ma-charte.md comment la réutiliser, et montre-la-moi sur une vidéo.
 ```
 
 Ensuite, utilise-la dans n'importe quel Reel en la nommant : « ajoute ma signature au début ».
@@ -46,5 +46,5 @@ Ensuite, utilise-la dans n'importe quel Reel en la nommant : « ajoute ma signat
 Envie de voir d'autres styles avant de te lancer ? Demande à Claude :
 
 ```
-Applique la charte « douceur » de brand-exemples.ts, que je voie le résultat. Ensuite remets ma charte.
+Montre-moi ma dernière vidéo avec la charte « douceur » de charte/exemples.md, que je voie le résultat. Ensuite reviens à ma charte.
 ```

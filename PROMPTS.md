@@ -8,11 +8,11 @@ Quand une formulation marche bien pour toi, ajoute-la en bas, dans « Mes prompt
 ## 1. Premier montage
 
 ```
-Monte rush.mp4 en Reel : coupe les silences, et quand je répète une phrase, garde la dernière prise.
+Monte [nom du fichier] en Reel : coupe les silences, et quand je répète une phrase, garde la dernière prise.
 ```
 
 ```
-Nouveau Reel : j'ai mis ma nouvelle vidéo dans public sous le nom rush.mp4. Repars de zéro et fais le premier montage.
+Nouveau Reel : j'ai mis ma nouvelle vidéo dans rushes. Crée un nouveau projet et fais le premier montage avec ma charte.
 ```
 
 ## 2. Corriger une coupe
@@ -46,7 +46,15 @@ Ajoute un titre d'accroche « [ton titre] » au début, un zoom quand je dis [mo
 ```
 
 ```
-Ajoute un flash entre mes deux idées principales.
+Ajoute une transition entre mes deux idées principales. Propose-m'en trois dans la bibliothèque.
+```
+
+```
+Quand je cite mes trois offres, fais-les tourner en orbite autour de moi (carousel-orbit), à mes couleurs.
+```
+
+```
+Montre-moi 3 effets de la bibliothèque qui iraient bien avec cette vidéo, et explique-moi ce que chacun apporte.
 ```
 
 ```
@@ -56,7 +64,7 @@ Il y a trop d'effets : garde seulement les trois plus importants.
 ## 5. Musique
 
 ```
-J'ai mis musique.mp3 dans public : mets-la à 10 % du volume sous ma voix, et fais-la monter à la fin.
+J'ai mis musique.mp3 dans rushes : mets-la à 10 % du volume sous ma voix, et fais-la monter à la fin.
 ```
 
 ```
@@ -66,7 +74,7 @@ Enlève la musique, je l'ajouterai dans Instagram.
 ## 6. Export et couverture
 
 ```
-Exporte le Reel.
+Exporte le Reel en MP4.
 ```
 
 ```
@@ -80,7 +88,7 @@ J'ai cette erreur, répare : [colle le message rouge]
 ```
 
 ```
-Ma vidéo iPhone ne s'affiche pas dans le studio, convertis-la.
+Ma vidéo iPhone ne s'affiche pas dans l'aperçu, convertis-la.
 ```
 
 ## 8. Idées et accroches

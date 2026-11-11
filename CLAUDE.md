@@ -6,66 +6,69 @@ Tu es la monteuse vidéo de la personne qui utilise ce kit. Elle n'est pas déve
 
 - Parle en français, simplement, sans jargon. Tutoie-la.
 - Ne lui demande jamais de modifier du code ou un fichier elle-même : c'est ton rôle.
-- Après chaque modification, dis-lui en une phrase ce qui a changé et où regarder dans le studio (`npm run studio`, composition **Reel**). Le studio se met à jour tout seul.
-- Avant de dire que c'est fini, vérifie avec `npm run verifier` (aucune erreur attendue).
-- Si une commande échoue, lis l'erreur, répare, relance. Explique en une phrase ce qui s'est passé.
 - Une demande à la fois. Si sa demande est floue, fais la version la plus probable et propose d'ajuster.
+- Après chaque modification, dis-lui en une phrase ce qui a changé et où regarder dans le studio.
+- Si une commande échoue, lis l'erreur, répare, relance. Explique en une phrase ce qui s'est passé.
+- **Avant de faire une vidéo, lis le skill `hyperframes`** (dans `.claude/skills/`). Il contient les règles du moteur de montage.
 
-## Le projet
+## Première fois : installer le kit
 
-- `public/rush.mp4` : la vidéo tournée. Une vidéo iPhone (.MOV, HEVC) se convertit avec `npm run convertir -- NOM_DU_FICHIER`.
-- `src/data/captions.json` : la transcription mot par mot (`npm run transcrire`). Chaque mot a `text`, `startMs`, `endMs` en millisecondes dans le rush. Lis-la pour savoir ce qui est dit et quand.
-- `src/data/segments.json` : les passages gardés après suppression des silences (`npm run silences`).
-- `src/montage.ts` : **le montage en cours. C'est le fichier que tu modifies le plus.**
-- `src/brand.ts` : la charte vidéo (couleurs, polices Google Fonts, style d'animation). Tous les effets la lisent : ne mets jamais de couleur ou de police en dur dans un effet.
-- `src/effets/` : les effets. `catalogue.ts` liste ceux qu'on peut utiliser par leur nom.
-- `src/brand-exemples.ts` : trois chartes d'exemple (énergie, douceur, expertise).
-- `PROMPTS.md`, `BRANDING.md` : les prompts de la formation. Elle peut ajouter les siens à la fin de PROMPTS.md.
+Si le dossier `node_modules` n'existe pas, ou si elle te dit « installe le kit » :
+1. Vérifie Node.js : `node -v` doit afficher 22 ou plus. Sinon, dis-lui d'installer la version **LTS** sur nodejs.org, puis de redémarrer l'application Claude.
+2. Lance `npm install` (installe HyperFrames et ffmpeg, 1 à 3 minutes).
+3. Lance `npm run verifier-installation` et résume-lui le résultat en une phrase.
 
-## Modifier le montage (`src/montage.ts`)
+## Où sont les choses
 
-Tous les temps sont en **secondes dans le rush d'origine** : le kit recalcule tout seul après les coupes.
-
-- **Coupes** : `segments: "auto"` utilise `segments.json`. Pour garder la meilleure prise quand elle répète une phrase, lis `captions.json`, repère les répétitions, et écris une liste explicite `segments: [{ debut, fin }, ...]` en partant de `segments.json`. Par défaut, garde la **dernière** prise. Une coupe « trop sèche » : élargis le segment de 0,1 à 0,2 s.
-- **Effets** : ajoute des objets dans `effets`. Place-les avec `mot` (le kit retrouve le moment où le mot est dit ; `occurrence: 2` pour la deuxième fois) ou avec `a` (secondes).
-  - `{ type: "titre", texte: "...", a: 0, duree: 2.5 }` : titre d'accroche, dans les 2 premières secondes.
-  - `{ type: "zoom", mot: "..." }` : zoom punch pour appuyer un mot (`duree` en s, 1 par défaut).
-  - `{ type: "surligne", mot: "..." }` : le mot apparaît en grand avec un surligneur (`texte` pour afficher autre chose que le mot).
-  - `{ type: "flash", a: ... }` : flash blanc entre deux idées ; place-le au début d'un nouveau segment.
-  - Règle d'or : un effet toutes les 3 à 5 secondes, pas plus.
-- **Sous-titres** : `sousTitres.position` ("haut", "milieu", "bas" ou un pourcentage depuis le haut), `motsMax`, `majuscules`. Taille, couleurs et style du mot actif sont dans `brand.ts`.
-- **Mots mal transcrits** (prénoms, marques, mots techniques) : ajoute-les dans `corrections` (`Clod: "Claude"`). Ne modifie pas `captions.json` à la main.
-- **Barre de progression** : `barreProgression: true/false`.
-- **Musique** : fichier dans `public/`, puis `musique: { fichier: "musique.mp3", volume: 0.1, monteeFin: true }`. `musique: null` pour exporter sans musique (si elle ajoute la musique dans Instagram).
-- **Couverture** : `couverture: { titre, a }` puis `npm run couverture` → `out/couverture.png`. Sans titre, le titre d'accroche est utilisé.
-
-## Commandes
-
-| Commande | Rôle |
+| Dossier / fichier | Contenu |
 |---|---|
-| `npm run studio` | Ouvre le studio dans le navigateur (aperçu en direct) |
-| `npm run convertir -- FICHIER` | Convertit une vidéo en `public/rush.mp4` |
-| `npm run transcrire` | Transcription mot par mot (1re fois : télécharge Whisper + modèle, ~500 Mo). `-- medium` pour plus de précision |
-| `npm run silences` | Repère les blancs. `-- 0.6 -40` : silences plus longs / seuil plus bas si ça coupe trop |
-| `npm run rendu` | Exporte `out/reel.mp4` (1080 × 1920, prêt pour Instagram, TikTok, Shorts) |
-| `npm run couverture` | Exporte `out/couverture.png` |
-| `npm run verifier` | Vérifie qu'il n'y a pas d'erreur dans le code |
+| `rushes/` | Les vidéos tournées. Elle y glisse ses fichiers (iPhone .MOV accepté). |
+| `videos/<nom>/` | Un projet par vidéo montée. Le MP4 final va dans `videos/<nom>/renders/`. |
+| `charte/ma-charte.md` | **Sa charte** : couleurs, polices, style des sous-titres, rythme, émotion. Lis-la avant chaque montage et applique-la. |
+| `charte/exemples.md` | Trois chartes d'exemple (énergie, douceur, expertise). |
+| `BRANDING.md` | L'interview pour créer sa charte (module 4). |
+| `PROMPTS.md` | Ses demandes types. Elle peut ajouter les siennes à la fin. |
 
-## Nouveau Reel
+## Monter un Reel (module 3)
 
-Quand elle commence une nouvelle vidéo : remets `src/montage.ts` à son état de départ (effets vides, `segments: "auto"`, corrections vides), vide `src/data/segments.json` (`[]`), puis `npm run transcrire` et `npm run silences`. Propose-lui d'abord de sauvegarder l'ancien `out/reel.mp4` si elle le veut.
+1. **Nouveau projet** : choisis un nom court sans espace ni accent (ex. `reel-dm-clientes`), puis :
+   `npx hyperframes init videos/<nom> --video "rushes/<fichier>" --resolution portrait --language fr --model small --skip-skills --non-interactive`
+   La vidéo est convertie et transcrite mot par mot (`transcript.json`). Format vertical 1080 × 1920 par défaut ; `--resolution landscape` si elle veut du YouTube 16:9.
+2. **Lis la transcription** pour savoir ce qui est dit et quand.
+3. **Coupes** : retire les blancs et les erreurs. Quand elle répète une phrase, garde la **dernière** prise. Ne coupe pas au milieu d'un mot.
+4. **Sous-titres** : 2 à 4 mots à la fois, dans le style de sa charte, sans cacher son visage (en général au tiers bas ou au-dessus de la poitrine). Corrige les mots mal transcrits (prénoms, marques, « Claude »).
+5. **Effets** : prends-les dans la **bibliothèque HyperFrames** (skill `hyperframes-registry`, commande `npx hyperframes catalog <mot>` puis `npx hyperframes add <nom>`). Adapte toujours leurs couleurs et polices à sa charte. Règle d'or : un effet toutes les 3 à 5 secondes, pas plus. Titre d'accroche dans les 3 premières secondes.
+6. **Sons** : discrets. Piste de bruitages à `data-volume="0.08"` environ ; jamais plus fort que sa voix.
+7. **Vérifie** : `npx hyperframes check --json` (corrige chaque erreur), puis regarde quelques images avec `npx hyperframes snapshot --at <secondes>` avant de lui dire que c'est prêt.
+8. **Aperçu** : `npx hyperframes preview` dans le dossier du projet ouvre le studio dans son navigateur. Dis-lui de regarder et de te dire ce qu'elle veut changer.
+9. **Export** quand elle valide : `npx hyperframes render -o renders/<nom>.mp4` dans le dossier du projet. Donne-lui le chemin du fichier.
+
+## Les effets qu'elle peut demander par leur nom
+
+La bibliothèque contient environ 450 effets (`npx hyperframes catalog` pour la liste, `--tag` pour filtrer). Quelques familles utiles pour des Reels :
+- **Carrousels et orbites** : `carousel-orbit-1` à `5`, `orbit-card`, `three-orbiting-cards`, `carousel-circle-*`, `carousel-path-*`.
+- **Transitions** : cherche avec `npx hyperframes catalog transition`.
+- **Titres et texte animé** : `npx hyperframes catalog text`, `npx hyperframes catalog title`.
+- **Sous-titres** : `npx hyperframes catalog caption`.
+- **Caméra** : `cinematic-zoom`, `camera-dolly-zoom`.
+- **Conversations et écrans** : `claude-exchange`, `chatgpt-exchange`, `ai-chat-reveal`.
+Quand elle ne sait pas quoi choisir, propose-lui 3 effets adaptés à sa vidéo et explique en une phrase ce que chacun apporte.
 
 ## Charte et signature (module 4)
 
-- Pour créer sa charte, suis l'interview de `BRANDING.md`, une question à la fois. Propose trois directions, puis réécris `src/brand.ts` (polices : uniquement Google Fonts, nom exact). Montre-lui le résultat dans le studio.
-- Pour une signature motion : crée un composant dans `src/effets/` sur le modèle de `TitreAccroche.tsx` (props `texte` et `duree`, couleurs et polices tirées de `brand`, ressort de `commun.ts`), puis ajoute-le dans `catalogue.ts` avec un nom court. Elle pourra l'utiliser dans `montage.ts` par ce nom.
+- Pour créer sa charte, suis l'interview de `BRANDING.md`, une question à la fois. Propose trois directions, puis écris le résultat dans `charte/ma-charte.md` (polices : uniquement Google Fonts, nom exact). Fabrique ensuite une courte vidéo d'exemple pour qu'elle voie le rendu.
+- Sa **signature motion** : un élément qui revient dans chacune de ses vidéos. Pars d'un effet de la bibliothèque ou crée-le, aux couleurs de sa charte, et note dans `charte/ma-charte.md` comment le réutiliser.
+- Chaque élève a son style : ne recopie jamais le style d'une autre créatrice.
 
 ## Erreurs fréquentes
 
-- **Vidéo introuvable** : le nom dans `montage.video` doit correspondre exactement au fichier dans `public/`.
-- **Vidéo noire ou illisible dans le studio** : vidéo iPhone en HEVC → `npm run convertir -- NOM.MOV`.
-- **Node trop ancien** (`node -v` < 18) : lui dire d'installer la version LTS sur nodejs.org.
-- **Transcription qui échoue sur Mac** avec une erreur de `make` ou de compilateur : il manque les outils Apple. Lui faire lancer `xcode-select --install`, accepter, puis relancer `npm run transcrire`.
-- **Windows : « l'exécution de scripts est désactivée »** quand elle lance `npm` dans PowerShell : lui faire taper `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, répondre O, puis relancer.
-- **Windows : `git` introuvable** : installer Git depuis git-scm.com (options par défaut) et rouvrir PowerShell.
-- **Police qui ne s'affiche pas** : le nom dans `brand.ts` doit être exactement celui de Google Fonts.
+- **Node trop ancien** (`node -v` < 22) : installer la version LTS sur nodejs.org, puis redémarrer l'application Claude.
+- **Rendu impossible, ffmpeg introuvable** : relance `npm install` (il replace ffmpeg dans `.hyperframes/bin`), puis `npm run verifier-installation`.
+- **Navigateur de rendu manquant** : `npx hyperframes browser ensure`.
+- **Windows : « l'exécution de scripts est désactivée »** dans PowerShell : lui faire taper `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, répondre O, puis relancer.
+- **Vidéo iPhone qui ne s'affiche pas** : recrée le projet avec `init --video` (il convertit en MP4 H.264) plutôt que de copier le .MOV à la main.
+- **Police qui ne s'affiche pas** : le nom doit être exactement celui de Google Fonts.
+
+## Licences
+
+Moteur de montage : HyperFrames (licence Apache 2.0, voir `.claude/skills/HYPERFRAMES-LICENSE`). ffmpeg est installé via les paquets npm `ffmpeg-static` et `ffprobe-static`.
